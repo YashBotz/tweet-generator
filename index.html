@@ -3,37 +3,77 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Tweet Caption Generator</title>
 
     <!-- Tailwind CSS via CDN -->
-    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Canvas Confetti for celebration effect -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
+
+    <title>✨ Viral Caption Generator ✨</title>
 </head>
+<body class="flex flex-col items-center justify-center min-h-screen bg-gradient-to-br from-pink-100 to-blue-100 p-6">
 
-<body class="bg-gradient-to-r from-purple-400 via-pink-500 to-red-500 min-h-screen flex items-center justify-center">
-<div class="bg-white p-8 rounded-xl shadow-lg w-full max-w-md text-center">
-    <h1 class="text-2xl font-bold mb-4">Tweet Caption Generator</h1>
+<h1 class="text-4xl md:text-5xl font-extrabold text-gray-900 mb-8 text-center">
+    ✨ Viral Caption Generator ✨
+</h1>
 
-    <!-- Input -->
-    <input
-            id="keyword"
-            type="text"
-            placeholder="Enter a topic (e.g., Coffee)"
-            class="border p-2 rounded w-full mb-4"
-    >
+<button
+        onclick="generateCaption()"
+        class="px-8 py-4 bg-indigo-600 text-white text-lg font-semibold rounded-2xl shadow-lg hover:bg-indigo-700 active:scale-95 transition"
+>
+    Generate Caption 🚀
+</button>
 
-    <!-- Button -->
-    <button
-            id="generate"
-            class="bg-purple-500 text-white px-4 py-2 rounded hover:bg-purple-600 transition"
-    >
-        Generate
-    </button>
+<p id="captionOutput" class="mt-10 text-2xl font-semibold text-center text-gray-800 max-w-xl"></p>
 
-    <!-- Results container -->
-    <div id="results" class="mt-6 space-y-2 text-left"></div>
-</div>
+<script>
+    // 🎉 Confetti launcher
+    function launchConfetti() {
+      confetti({
+        particleCount: 120,
+        spread: 80,
+        origin: { y: 0.6 }
+      });
+    }
 
-<!-- JS file -->
-<script src="script.js"></script>
+    // 🪄 Caption generator
+    function generateCaption() {
+      const templates = [
+        "When life gives you {thing}, make {thing2} 🍹",
+        "Serving looks hotter than {thing} 🔥",
+        "POV: {thing} just hit different ✨",
+        "Manifesting {thing} energy only ✨",
+        "Catching vibes, not {thing} 😎",
+        "{thing}? Nah, I’m the {thing2} now 😏",
+        "Living rent-free in {thing}'s head 🧠",
+        "Currently in my {thing} era 💅",
+        "Plot twist: I *am* the {thing2} 🤯",
+        "Certified {thing2} vibes only 🪩"
+      ];
+
+      const things = [
+        "Monday blues", "WiFi drop", "vibe check", "midnight snacks",
+        "coffee overdose", "main character moment", "reality check", "meme scroll",
+        "late night thoughts", "group chat chaos"
+      ];
+
+      const things2 = [
+        "glow-up", "chaotic good", "good vibes", "meme material",
+        "energy boost", "iconic moment", "gold standard", "vibe shift"
+      ];
+
+      const template = templates[Math.floor(Math.random() * templates.length)];
+      const thing = things[Math.floor(Math.random() * things.length)];
+      const thing2 = things2[Math.floor(Math.random() * things2.length)];
+
+      const caption = template.replace("{thing}", thing).replace("{thing2}", thing2);
+
+      document.getElementById("captionOutput").innerText = caption;
+
+      // Launch confetti each time a new caption is generated
+      launchConfetti();
+    }
+</script>
 </body>
 </html>
