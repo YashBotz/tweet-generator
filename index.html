@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tweet Caption Generator</title>
+
+    <!-- Tailwind CSS via CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+</head>
+
+<body class="bg-gradient-to-r from-purple-400 via-pink-500 to-red-500 min-h-screen flex items-center justify-center">
+<div class="bg-white p-8 rounded-xl shadow-lg w-full max-w-md text-center">
+    <h1 class="text-2xl font-bold mb-4">Tweet Caption Generator</h1>
+
+    <!-- Input -->
+    <input
+            id="keyword"
+            type="text"
+            placeholder="Enter a topic (e.g., Coffee)"
+            class="border p-2 rounded w-full mb-4"
+    >
+
+    <!-- Button -->
+    <button
+            id="generate"
+            class="bg-purple-500 text-white px-4 py-2 rounded hover:bg-purple-600 transition"
+    >
+        Generate
+    </button>
+
+    <!-- Results container -->
+    <div id="results" class="mt-6 space-y-2 text-left"></div>
+</div>
+
+<!-- JS file -->
+<script src="script.js"></script>
+</body>
+</html>
