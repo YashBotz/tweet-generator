@@ -1,53 +1,97 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>🔥 Gen-Z Viral Caption Generator 🔥</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>🔥 Gen-Z Viral Caption Generator 🔥</title>
 
-    <!-- Tailwind CSS CDN -->
-    <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
 
-    <!-- Canvas Confetti -->
-    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
+  <!-- Canvas Confetti -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
 </head>
 <body class="bg-gradient-to-br from-pink-100 to-blue-100 min-h-screen flex flex-col items-center p-6">
 
-<h1 class="text-4xl md:text-5xl font-extrabold text-gray-900 mb-8 text-center">
+  <h1 class="text-4xl md:text-5xl font-extrabold text-gray-900 mb-6 text-center">
     🔥 Viral Caption Generator 🔥
-</h1>
+  </h1>
 
-<!-- Tabs -->
-<div class="flex flex-wrap justify-center gap-3 mb-6">
-    <button class="tab-button px-6 py-2 rounded-2xl font-semibold text-white shadow-lg transition-all duration-300 transform hover:scale-105 active:scale-95 bg-gradient-to-r from-purple-500 to-pink-500" data-tab="twitter">Twitter</button>
+  <!-- Tabs -->
+  <div class="flex flex-wrap justify-center gap-3 mb-4">
+    <button class="tab-button px-6 py-2 rounded-2xl font-semibold text-white shadow-lg transition-all duration-300 transform hover:scale-105 active:scale-95 bg-gradient-to-r from-purple-500 to-pink-500 ring ring-indigo-500" data-tab="twitter">Twitter</button>
     <button class="tab-button px-6 py-2 rounded-2xl font-semibold text-white shadow-lg transition-all duration-300 transform hover:scale-105 active:scale-95 bg-gradient-to-r from-pink-400 to-red-400" data-tab="tiktok">TikTok</button>
     <button class="tab-button px-6 py-2 rounded-2xl font-semibold text-white shadow-lg transition-all duration-300 transform hover:scale-105 active:scale-95 bg-gradient-to-r from-green-400 to-teal-400" data-tab="instagram">Instagram</button>
+    <button class="tab-button px-6 py-2 rounded-2xl font-semibold text-white shadow-lg transition-all duration-300 transform hover:scale-105 active:scale-95 bg-gradient-to-r from-blue-400 to-blue-600" data-tab="facebook">Facebook</button>
     <button class="tab-button px-6 py-2 rounded-2xl font-semibold text-white shadow-lg transition-all duration-300 transform hover:scale-105 active:scale-95 bg-gradient-to-r from-yellow-400 to-orange-400" data-tab="emoji">Emoji</button>
-</div>
+  </div>
 
-<!-- Mood selection -->
-<div class="flex flex-wrap justify-center gap-3 mb-6">
-    <button class="mood-button px-4 py-2 rounded-2xl font-semibold text-white shadow-lg transition-all duration-300 transform hover:scale-105 active:scale-95 bg-gradient-to-r from-purple-400 to-pink-400" data-mood="funny">😂 Funny</button>
+  <!-- Input area -->
+  <div class="w-full max-w-3xl bg-white/60 backdrop-blur rounded-2xl shadow p-4 mb-4">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
+      <div class="col-span-1 md:col-span-1">
+        <label class="block text-sm font-semibold text-gray-700 mb-1">Topic</label>
+        <input id="topicInput" type="text" placeholder="e.g., coffee, gym, startup" class="w-full px-3 py-2 rounded-xl border border-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500" />
+      </div>
+      <div class="col-span-1 md:col-span-1">
+        <label class="block text-sm font-semibold text-gray-700 mb-1">Keywords (comma)</label>
+        <input id="keywordsInput" type="text" placeholder="e.g., morning, grind, vibes" class="w-full px-3 py-2 rounded-xl border border-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500" />
+      </div>
+      <div class="col-span-1 md:col-span-1">
+        <label class="block text-sm font-semibold text-gray-700 mb-1">Length</label>
+        <select id="lengthSelect" class="w-full px-3 py-2 rounded-xl border border-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500">
+          <option value="short">Short</option>
+          <option value="medium">Medium</option>
+          <option value="long">Long</option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <!-- Mood selection -->
+  <div class="flex flex-wrap justify-center gap-3 mb-4">
+    <button class="mood-button px-4 py-2 rounded-2xl font-semibold text-white shadow-lg transition-all duration-300 transform hover:scale-105 active:scale-95 bg-gradient-to-r from-purple-400 to-pink-400 ring ring-gray-800" data-mood="funny">😂 Funny</button>
     <button class="mood-button px-4 py-2 rounded-2xl font-semibold text-white shadow-lg transition-all duration-300 transform hover:scale-105 active:scale-95 bg-gradient-to-r from-red-400 to-pink-500" data-mood="savage">😎 Savage</button>
     <button class="mood-button px-4 py-2 rounded-2xl font-semibold text-white shadow-lg transition-all duration-300 transform hover:scale-105 active:scale-95 bg-gradient-to-r from-green-400 to-lime-400" data-mood="cute">🥰 Cute</button>
     <button class="mood-button px-4 py-2 rounded-2xl font-semibold text-white shadow-lg transition-all duration-300 transform hover:scale-105 active:scale-95 bg-gradient-to-r from-yellow-400 to-orange-400" data-mood="sarcastic">🤔 Sarcastic</button>
-</div>
+  </div>
 
-<!-- Generate button -->
-<button id="generate" class="px-8 py-4 bg-indigo-600 text-white text-lg font-semibold rounded-2xl shadow-lg hover:bg-indigo-700 active:scale-95 transition mb-6">
+  <!-- Generate button -->
+  <button id="generate" class="px-8 py-4 bg-indigo-600 text-white text-lg font-semibold rounded-2xl shadow-lg hover:bg-indigo-700 active:scale-95 transition mb-4">
     Generate Caption 🚀
-</button>
+  </button>
 
-<!-- Output -->
-<div id="captionContainer" class="flex flex-col items-center">
-    <p id="captionOutput" class="text-2xl font-semibold text-center text-gray-800 max-w-xl mb-4"></p>
-    <div id="buttonsContainer" class="flex gap-4">
-        <button id="copyBtn" class="px-6 py-3 rounded-2xl font-semibold text-white shadow-lg transition-all duration-300 transform hover:scale-105 active:scale-95 bg-gradient-to-r from-green-400 to-lime-400">Copy 📋</button>
-        <a id="shareBtn" target="_blank" class="px-6 py-3 rounded-2xl font-semibold text-white shadow-lg transition-all duration-300 transform hover:scale-105 active:scale-95 bg-gradient-to-r from-blue-500 to-indigo-500">Share 🐦</a>
+  <!-- Output -->
+  <div id="captionContainer" class="flex flex-col items-center w-full">
+    <p id="captionOutput" class="text-2xl font-semibold text-center text-gray-800 max-w-3xl mb-1"></p>
+    <p id="charCounter" class="text-sm text-gray-600 mb-2 hidden"></p>
+    <div id="buttonsContainer" class="flex flex-wrap justify-center gap-3">
+      <button id="remixBtn" class="px-5 py-3 rounded-2xl font-semibold text-white shadow-lg transition-all duration-300 transform hover:scale-105 active:scale-95 bg-gradient-to-r from-purple-400 to-pink-500">Remix 🔁</button>
+      <button id="saveBtn" class="px-5 py-3 rounded-2xl font-semibold text-white shadow-lg transition-all duration-300 transform hover:scale-105 active:scale-95 bg-gradient-to-r from-yellow-400 to-orange-500">Save ❤️</button>
+      <button id="copyBtn" class="px-6 py-3 rounded-2xl font-semibold text-white shadow-lg transition-all duration-300 transform hover:scale-105 active:scale-95 bg-gradient-to-r from-green-400 to-lime-400">Copy 📋</button>
+      <a id="shareBtn" target="_blank" class="px-6 py-3 rounded-2xl font-semibold text-white shadow-lg transition-all duration-300 transform hover:scale-105 active:scale-95 bg-gradient-to-r from-blue-500 to-indigo-500">Share 🐦</a>
     </div>
-</div>
+  </div>
 
-<script>
+  <!-- History & Favorites -->
+  <div class="w-full max-w-3xl mt-6 grid grid-cols-1 md:grid-cols-2 gap-4">
+    <div class="bg-white/60 backdrop-blur rounded-2xl shadow p-4">
+      <div class="flex items-center justify-between mb-2">
+        <h2 class="text-lg font-semibold text-gray-800">Recent Captions</h2>
+        <button id="clearHistoryBtn" class="text-sm text-red-600 hover:underline">Clear</button>
+      </div>
+      <ul id="historyList" class="space-y-2 text-sm"></ul>
+    </div>
+    <div class="bg-white/60 backdrop-blur rounded-2xl shadow p-4">
+      <div class="flex items-center justify-between mb-2">
+        <h2 class="text-lg font-semibold text-gray-800">Favorites ❤️</h2>
+        <button id="clearFavoritesBtn" class="text-sm text-red-600 hover:underline">Clear</button>
+      </div>
+      <ul id="favoritesList" class="space-y-2 text-sm"></ul>
+    </div>
+  </div>
+
+  <script>
     let currentTab = 'twitter';
     let currentMood = 'funny';
 
@@ -57,6 +101,9 @@
         currentTab = btn.dataset.tab;
         document.querySelectorAll('.tab-button').forEach(b => b.classList.remove('ring', 'ring-indigo-500'));
         btn.classList.add('ring', 'ring-indigo-500');
+        updateShareLabel();
+        const currentText = document.getElementById('captionOutput').innerText;
+        updateCharCounter(currentText);
       });
     });
 
@@ -74,56 +121,254 @@
       confetti({ particleCount: 120, spread: 80, origin: { y: 0.6 } });
     }
 
-    // Caption templates
+    // Caption templates per platform
     const templates = {
       twitter: [
-        "POV: {thing} hits different ✨",
-        "Living rent-free in {thing}'s head 🧠",
-        "{thing}? Nah, I’m the {thing2} now 😏",
-        "Serving looks hotter than {thing} 🔥"
+        "POV: {topic} hits different ✨",
+        "Living rent-free in {topic}'s head 🧠",
+        "{topic}? Nah, I’m the {alt} now 😏",
+        "Serving looks hotter than {topic} 🔥"
       ],
       tiktok: [
-        "Me trying to {thing} like a pro 😂",
-        "{thing} energy only ✨",
-        "When {thing} meets {thing2} 🤯",
-        "This {thing} trend is crazy 😎"
+        "Trying to {verb} like a pro 😂 {hash}",
+        "{topic} energy only ✨ {hash}",
+        "When {topic} meets {alt} 🤯 {hash}",
+        "This {topic} trend is crazy 😎 {hash}"
       ],
       instagram: [
-        "Currently in my {thing} era 💅",
-        "Certified {thing2} vibes only 🪩",
-        "{thing} mode: ON 🔥",
-        "Just another {thing} day 😏"
+        "In my {topic} era 💅 {hash}",
+        "Certified {alt} vibes only 🪩 {hash}",
+        "{topic} mode: ON 🔥 {hash}",
+        "Just another {topic} day 😏 {hash}"
+      ],
+      facebook: [
+        "Today was all about {topic}. {extra}\n\nWhat’s your take?",
+        "Little update: {topic}. {extra}\n\nDrop your thoughts below ⬇️",
+        "Reminder to self: {topic}. {extra}\n\nHow’s your day going?",
+        "Because sometimes {topic} is exactly what you need. {extra}"
       ],
       emoji: [
-        "💖 {thing} 😎✨",
-        "🔥 {thing} 😏🎉",
-        "😂 {thing2} 💅🌈",
-        "🎶 {thing} 💫💖"
+        "💖 {topic} 😎✨",
+        "🔥 {topic} 😏🎉",
+        "😂 {alt} 💅🌈",
+        "🎶 {topic} 💫💖"
       ]
     };
 
-    const things = ["Monday blues", "WiFi drop", "vibe check", "midnight snacks", "coffee overdose", "main character moment", "reality check", "meme scroll"];
-    const things2 = ["glow-up", "chaotic good", "good vibes", "meme material", "energy boost", "iconic moment", "gold standard", "vibe shift"];
+    const alts = ["glow-up", "chaotic good", "good vibes", "meme material", "energy boost", "iconic moment", "gold standard", "vibe shift"];    
+    const verbs = ["cook", "grind", "hustle", "glow", "focus", "create", "win", "manifest"];
 
-    // Generate caption
-    function generateCaption() {
-      const templateList = templates[currentTab];
-      const template = templateList[Math.floor(Math.random() * templateList.length)];
-      const thing = things[Math.floor(Math.random() * things.length)];
-      const thing2 = things2[Math.floor(Math.random() * things2.length)];
+    function pick(arr){ return arr[Math.floor(Math.random()*arr.length)]; }
 
-      const caption = template.replace("{thing}", thing).replace("{thing2}", thing2);
+    function parseKeywords(input){
+      if(!input) return [];
+      return input.split(',').map(s=>s.trim()).filter(Boolean);
+    }
 
-      document.getElementById('captionOutput').innerText = caption;
+    function makeHashtags(platform, topic, keywords, count=6){
+      const base = [topic, ...keywords];
+      const cleaned = base
+        .filter(Boolean)
+        .map(w => w.toLowerCase().replace(/[^a-z0-9]+/g,'').slice(0,28))
+        .filter(Boolean);
+      const extras = platform === 'tiktok'
+        ? ['fyp', 'tiktok', 'viral', 'trend']
+        : platform === 'instagram'
+          ? ['reels', 'instagood', 'explore', 'viral']
+          : [];
+      const pool = Array.from(new Set([...cleaned, ...extras]));
+      const tags = [];
+      while(tags.length < Math.min(count, pool.length)){
+        const t = pick(pool);
+        if(!tags.includes(t)) tags.push(t);
+      }
+      return tags.map(t=>`#${t}`).join(' ');
+    }
 
-      // Update share link
+    function expandByLength(text, length){
+      if(length === 'short') return text;
+      if(length === 'medium') return text + (text.endsWith('.') ? '' : '.') + ' Let\'s go!';
+      // long
+      return text + (text.endsWith('.') ? '' : '.') + ' Feeling grateful and locked in. 🚀';
+    }
+
+    function updateShareLabel(){
       const shareBtn = document.getElementById('shareBtn');
-      shareBtn.href = `https://twitter.com/intent/tweet?text=${encodeURIComponent(caption)}`;
+      const label = {
+        twitter: 'Share 🐦',
+        tiktok: 'Share 🎵',
+        instagram: 'Share 📸',
+        facebook: 'Share f',
+        emoji: 'Share 😀'
+      }[currentTab] || 'Share';
+      shareBtn.textContent = label;
+    }
 
-      launchConfetti();
+    function buildCaption(){
+      const topicRaw = document.getElementById('topicInput').value.trim();
+      const topic = topicRaw || pick(['Monday blues','coffee','gym','side hustle','weekend vibes','study grind']);
+      const keywords = parseKeywords(document.getElementById('keywordsInput').value);
+      const alt = keywords[0] || pick(alts);
+      const verb = pick(verbs);
+      const length = document.getElementById('lengthSelect').value;
+
+      let hash = '';
+      if(currentTab === 'instagram' || currentTab === 'tiktok'){
+        hash = makeHashtags(currentTab, topic, keywords, currentTab==='instagram'?8:5);
+      }
+
+      let extra = '';
+      if(currentTab === 'facebook'){
+        extra = {
+          funny: 'Could not stop laughing all day 😂',
+          savage: 'No filter, just facts.',
+          cute: 'This made my heart happy 💖',
+          sarcastic: 'Totally not being dramatic at all.'
+        }[currentMood] || '';
+      }
+
+      const template = pick(templates[currentTab]);
+      let caption = template
+        .replace('{topic}', topic)
+        .replace('{alt}', alt)
+        .replace('{verb}', verb)
+        .replace('{hash}', hash)
+        .replace('{extra}', extra);
+
+      // mood seasoning
+      const seasoning = {
+        funny: ['😂', '🤣', 'lol'],
+        savage: ['😤', '💅', '😎'],
+        cute: ['✨', '💖', '🥰'],
+        sarcastic: ['🙃', '🤔']
+      }[currentMood] || [];
+
+      if(seasoning.length && currentTab !== 'instagram' && currentTab !== 'tiktok'){
+        caption += ' ' + pick(seasoning);
+      }
+
+      caption = expandByLength(caption, length);
+      return caption.trim();
+    }
+
+    function updateShareLink(caption){
+      const shareBtn = document.getElementById('shareBtn');
+      if(currentTab === 'twitter'){
+        shareBtn.href = `https://twitter.com/intent/tweet?text=${encodeURIComponent(caption)}`;
+        shareBtn.target = '_blank';
+      } else if(currentTab === 'facebook'){
+        const u = encodeURIComponent('https://example.com');
+        const q = encodeURIComponent(caption);
+        shareBtn.href = `https://www.facebook.com/sharer/sharer.php?u=${u}&quote=${q}`;
+        shareBtn.target = '_blank';
+      } else {
+        shareBtn.href = '#';
+        shareBtn.target = '';
+      }
+    }
+
+    function updateCharCounter(text){
+      const el = document.getElementById('charCounter');
+      if(currentTab === 'twitter'){
+        el.classList.remove('hidden');
+        const len = (text || '').length;
+        el.textContent = `Twitter: ${len}/280`;
+        if(len > 280){
+          el.classList.add('text-red-600');
+        } else {
+          el.classList.remove('text-red-600');
+        }
+      } else {
+        el.classList.add('hidden');
+      }
+    }
+
+    // Persistence helpers
+    const STORAGE_KEYS = { history: 'vcg_history', favorites: 'vcg_favorites' };
+    function loadList(key){
+      try { return JSON.parse(localStorage.getItem(key)) || []; } catch(e){ return []; }
+    }
+    function saveList(key, arr){
+      try { localStorage.setItem(key, JSON.stringify(arr)); } catch(e){}
+    }
+
+    let historyData = loadList(STORAGE_KEYS.history);
+    let favoritesData = loadList(STORAGE_KEYS.favorites);
+
+    function renderHistory(){
+      const ul = document.getElementById('historyList');
+      if(!ul) return;
+      ul.innerHTML = historyData.map((item, idx) => {
+        const date = new Date(item.ts || Date.now()).toLocaleTimeString();
+        const safe = item.text;
+        return `<li class="flex items-start justify-between gap-2">
+          <span class="flex-1 break-words" data-action="use" data-index="${idx}">${safe}</span>
+          <div class="flex gap-2 shrink-0">
+            <button class="text-blue-600 hover:underline text-xs" data-action="copy" data-index="${idx}">Copy</button>
+            <button class="text-pink-600 hover:underline text-xs" data-action="fav" data-index="${idx}">Fav</button>
+          </div>
+        </li>`;
+      }).join('');
+    }
+
+    function renderFavorites(){
+      const ul = document.getElementById('favoritesList');
+      if(!ul) return;
+      ul.innerHTML = favoritesData.map((item, idx) => {
+        const safe = item.text;
+        return `<li class="flex items-start justify-between gap-2">
+          <span class="flex-1 break-words" data-action="use" data-index="${idx}">${safe}</span>
+          <div class="flex gap-2 shrink-0">
+            <button class="text-blue-600 hover:underline text-xs" data-action="copy" data-index="${idx}">Copy</button>
+            <button class="text-red-600 hover:underline text-xs" data-action="remove" data-index="${idx}">Remove</button>
+          </div>
+        </li>`;
+      }).join('');
+    }
+
+    function addToHistory(text){
+      if(!text) return;
+      // de-duplicate by text
+      historyData = historyData.filter(i => i.text !== text);
+      historyData.unshift({ text, ts: Date.now(), tab: currentTab });
+      if(historyData.length > 10) historyData = historyData.slice(0,10);
+      saveList(STORAGE_KEYS.history, historyData);
+      renderHistory();
+    }
+    function addFavorite(text){
+      if(!text) return;
+      if(!favoritesData.find(i => i.text === text)){
+        favoritesData.unshift({ text, ts: Date.now(), tab: currentTab });
+        if(favoritesData.length > 100) favoritesData = favoritesData.slice(0,100);
+        saveList(STORAGE_KEYS.favorites, favoritesData);
+        renderFavorites();
+      }
+    }
+
+    function generateCaption(quiet=false){
+      const caption = buildCaption();
+      document.getElementById('captionOutput').innerText = caption;
+      updateShareLink(caption);
+      addToHistory(caption);
+      updateCharCounter(caption);
+      if(!quiet) launchConfetti();
     }
 
     document.getElementById('generate').addEventListener('click', generateCaption);
+
+    // Share click for platforms without web intent
+    document.getElementById('shareBtn').addEventListener('click', (e) => {
+      if(e.currentTarget.getAttribute('href') === '#'){
+        e.preventDefault();
+        const text = document.getElementById('captionOutput').innerText;
+        if(navigator.share){
+          navigator.share({ text }).catch(()=>{});
+        } else {
+          navigator.clipboard.writeText(text);
+          alert('Caption copied to clipboard! Paste it into your app.');
+        }
+      }
+    });
 
     // Copy button
     document.getElementById('copyBtn').addEventListener('click', () => {
@@ -131,6 +376,72 @@
       navigator.clipboard.writeText(text);
       alert('Caption copied to clipboard!');
     });
-</script>
+
+    // Remix button
+    document.getElementById('remixBtn').addEventListener('click', () => generateCaption(true));
+
+    // Save button
+    document.getElementById('saveBtn').addEventListener('click', () => {
+      const text = document.getElementById('captionOutput').innerText;
+      if(text) { addFavorite(text); }
+    });
+
+    // Clear buttons
+    document.getElementById('clearHistoryBtn').addEventListener('click', () => {
+      historyData = [];
+      saveList(STORAGE_KEYS.history, historyData);
+      renderHistory();
+    });
+    document.getElementById('clearFavoritesBtn').addEventListener('click', () => {
+      favoritesData = [];
+      saveList(STORAGE_KEYS.favorites, favoritesData);
+      renderFavorites();
+    });
+
+    // List interactions
+    document.getElementById('historyList').addEventListener('click', (e) => {
+      const action = e.target.dataset.action;
+      const idx = parseInt(e.target.dataset.index, 10);
+      if(Number.isNaN(idx)) return;
+      const item = historyData[idx];
+      if(!item) return;
+      if(action === 'copy'){
+        navigator.clipboard.writeText(item.text);
+        alert('Copied to clipboard!');
+      } else if(action === 'use'){
+        document.getElementById('captionOutput').innerText = item.text;
+        updateShareLink(item.text);
+        updateCharCounter(item.text);
+      } else if(action === 'fav'){
+        addFavorite(item.text);
+      }
+    });
+
+    document.getElementById('favoritesList').addEventListener('click', (e) => {
+      const action = e.target.dataset.action;
+      const idx = parseInt(e.target.dataset.index, 10);
+      if(Number.isNaN(idx)) return;
+      const item = favoritesData[idx];
+      if(!item) return;
+      if(action === 'copy'){
+        navigator.clipboard.writeText(item.text);
+        alert('Copied to clipboard!');
+      } else if(action === 'use'){
+        document.getElementById('captionOutput').innerText = item.text;
+        updateShareLink(item.text);
+        updateCharCounter(item.text);
+      } else if(action === 'remove'){
+        favoritesData.splice(idx,1);
+        saveList(STORAGE_KEYS.favorites, favoritesData);
+        renderFavorites();
+      }
+    });
+
+    // Initial label and renders
+    updateShareLabel();
+    renderHistory();
+    renderFavorites();
+    updateCharCounter(document.getElementById('captionOutput').innerText || '');
+  </script>
 </body>
 </html>
