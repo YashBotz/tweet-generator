@@ -1,79 +1,136 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>🔥 Gen-Z Viral Caption Generator 🔥</title>
 
-    <!-- Tailwind CSS via CDN -->
+    <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
 
-    <!-- Canvas Confetti for celebration effect -->
+    <!-- Canvas Confetti -->
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
-
-    <title>✨ Viral Caption Generator ✨</title>
 </head>
-<body class="flex flex-col items-center justify-center min-h-screen bg-gradient-to-br from-pink-100 to-blue-100 p-6">
+<body class="bg-gradient-to-br from-pink-100 to-blue-100 min-h-screen flex flex-col items-center p-6">
 
 <h1 class="text-4xl md:text-5xl font-extrabold text-gray-900 mb-8 text-center">
-    ✨ Viral Caption Generator ✨
+    🔥 Viral Caption Generator 🔥
 </h1>
 
-<button
-        onclick="generateCaption()"
-        class="px-8 py-4 bg-indigo-600 text-white text-lg font-semibold rounded-2xl shadow-lg hover:bg-indigo-700 active:scale-95 transition"
->
+<!-- Tabs -->
+<div class="flex flex-wrap justify-center gap-3 mb-6">
+    <button class="tab-button px-6 py-2 rounded-2xl font-semibold text-white shadow-lg transition-all duration-300 transform hover:scale-105 active:scale-95 bg-gradient-to-r from-purple-500 to-pink-500" data-tab="twitter">Twitter</button>
+    <button class="tab-button px-6 py-2 rounded-2xl font-semibold text-white shadow-lg transition-all duration-300 transform hover:scale-105 active:scale-95 bg-gradient-to-r from-pink-400 to-red-400" data-tab="tiktok">TikTok</button>
+    <button class="tab-button px-6 py-2 rounded-2xl font-semibold text-white shadow-lg transition-all duration-300 transform hover:scale-105 active:scale-95 bg-gradient-to-r from-green-400 to-teal-400" data-tab="instagram">Instagram</button>
+    <button class="tab-button px-6 py-2 rounded-2xl font-semibold text-white shadow-lg transition-all duration-300 transform hover:scale-105 active:scale-95 bg-gradient-to-r from-yellow-400 to-orange-400" data-tab="emoji">Emoji</button>
+</div>
+
+<!-- Mood selection -->
+<div class="flex flex-wrap justify-center gap-3 mb-6">
+    <button class="mood-button px-4 py-2 rounded-2xl font-semibold text-white shadow-lg transition-all duration-300 transform hover:scale-105 active:scale-95 bg-gradient-to-r from-purple-400 to-pink-400" data-mood="funny">😂 Funny</button>
+    <button class="mood-button px-4 py-2 rounded-2xl font-semibold text-white shadow-lg transition-all duration-300 transform hover:scale-105 active:scale-95 bg-gradient-to-r from-red-400 to-pink-500" data-mood="savage">😎 Savage</button>
+    <button class="mood-button px-4 py-2 rounded-2xl font-semibold text-white shadow-lg transition-all duration-300 transform hover:scale-105 active:scale-95 bg-gradient-to-r from-green-400 to-lime-400" data-mood="cute">🥰 Cute</button>
+    <button class="mood-button px-4 py-2 rounded-2xl font-semibold text-white shadow-lg transition-all duration-300 transform hover:scale-105 active:scale-95 bg-gradient-to-r from-yellow-400 to-orange-400" data-mood="sarcastic">🤔 Sarcastic</button>
+</div>
+
+<!-- Generate button -->
+<button id="generate" class="px-8 py-4 bg-indigo-600 text-white text-lg font-semibold rounded-2xl shadow-lg hover:bg-indigo-700 active:scale-95 transition mb-6">
     Generate Caption 🚀
 </button>
 
-<p id="captionOutput" class="mt-10 text-2xl font-semibold text-center text-gray-800 max-w-xl"></p>
+<!-- Output -->
+<div id="captionContainer" class="flex flex-col items-center">
+    <p id="captionOutput" class="text-2xl font-semibold text-center text-gray-800 max-w-xl mb-4"></p>
+    <div id="buttonsContainer" class="flex gap-4">
+        <button id="copyBtn" class="px-6 py-3 rounded-2xl font-semibold text-white shadow-lg transition-all duration-300 transform hover:scale-105 active:scale-95 bg-gradient-to-r from-green-400 to-lime-400">Copy 📋</button>
+        <a id="shareBtn" target="_blank" class="px-6 py-3 rounded-2xl font-semibold text-white shadow-lg transition-all duration-300 transform hover:scale-105 active:scale-95 bg-gradient-to-r from-blue-500 to-indigo-500">Share 🐦</a>
+    </div>
+</div>
 
 <script>
-    // 🎉 Confetti launcher
-    function launchConfetti() {
-      confetti({
-        particleCount: 120,
-        spread: 80,
-        origin: { y: 0.6 }
+    let currentTab = 'twitter';
+    let currentMood = 'funny';
+
+    // Tab selection
+    document.querySelectorAll('.tab-button').forEach(btn => {
+      btn.addEventListener('click', () => {
+        currentTab = btn.dataset.tab;
+        document.querySelectorAll('.tab-button').forEach(b => b.classList.remove('ring', 'ring-indigo-500'));
+        btn.classList.add('ring', 'ring-indigo-500');
       });
+    });
+
+    // Mood selection
+    document.querySelectorAll('.mood-button').forEach(btn => {
+      btn.addEventListener('click', () => {
+        currentMood = btn.dataset.mood;
+        document.querySelectorAll('.mood-button').forEach(b => b.classList.remove('ring', 'ring-gray-800'));
+        btn.classList.add('ring', 'ring-gray-800');
+      });
+    });
+
+    // Confetti
+    function launchConfetti() {
+      confetti({ particleCount: 120, spread: 80, origin: { y: 0.6 } });
     }
 
-    // 🪄 Caption generator
-    function generateCaption() {
-      const templates = [
-        "When life gives you {thing}, make {thing2} 🍹",
-        "Serving looks hotter than {thing} 🔥",
-        "POV: {thing} just hit different ✨",
-        "Manifesting {thing} energy only ✨",
-        "Catching vibes, not {thing} 😎",
-        "{thing}? Nah, I’m the {thing2} now 😏",
+    // Caption templates
+    const templates = {
+      twitter: [
+        "POV: {thing} hits different ✨",
         "Living rent-free in {thing}'s head 🧠",
+        "{thing}? Nah, I’m the {thing2} now 😏",
+        "Serving looks hotter than {thing} 🔥"
+      ],
+      tiktok: [
+        "Me trying to {thing} like a pro 😂",
+        "{thing} energy only ✨",
+        "When {thing} meets {thing2} 🤯",
+        "This {thing} trend is crazy 😎"
+      ],
+      instagram: [
         "Currently in my {thing} era 💅",
-        "Plot twist: I *am* the {thing2} 🤯",
-        "Certified {thing2} vibes only 🪩"
-      ];
+        "Certified {thing2} vibes only 🪩",
+        "{thing} mode: ON 🔥",
+        "Just another {thing} day 😏"
+      ],
+      emoji: [
+        "💖 {thing} 😎✨",
+        "🔥 {thing} 😏🎉",
+        "😂 {thing2} 💅🌈",
+        "🎶 {thing} 💫💖"
+      ]
+    };
 
-      const things = [
-        "Monday blues", "WiFi drop", "vibe check", "midnight snacks",
-        "coffee overdose", "main character moment", "reality check", "meme scroll",
-        "late night thoughts", "group chat chaos"
-      ];
+    const things = ["Monday blues", "WiFi drop", "vibe check", "midnight snacks", "coffee overdose", "main character moment", "reality check", "meme scroll"];
+    const things2 = ["glow-up", "chaotic good", "good vibes", "meme material", "energy boost", "iconic moment", "gold standard", "vibe shift"];
 
-      const things2 = [
-        "glow-up", "chaotic good", "good vibes", "meme material",
-        "energy boost", "iconic moment", "gold standard", "vibe shift"
-      ];
-
-      const template = templates[Math.floor(Math.random() * templates.length)];
+    // Generate caption
+    function generateCaption() {
+      const templateList = templates[currentTab];
+      const template = templateList[Math.floor(Math.random() * templateList.length)];
       const thing = things[Math.floor(Math.random() * things.length)];
       const thing2 = things2[Math.floor(Math.random() * things2.length)];
 
       const caption = template.replace("{thing}", thing).replace("{thing2}", thing2);
 
-      document.getElementById("captionOutput").innerText = caption;
+      document.getElementById('captionOutput').innerText = caption;
 
-      // Launch confetti each time a new caption is generated
+      // Update share link
+      const shareBtn = document.getElementById('shareBtn');
+      shareBtn.href = `https://twitter.com/intent/tweet?text=${encodeURIComponent(caption)}`;
+
       launchConfetti();
     }
+
+    document.getElementById('generate').addEventListener('click', generateCaption);
+
+    // Copy button
+    document.getElementById('copyBtn').addEventListener('click', () => {
+      const text = document.getElementById('captionOutput').innerText;
+      navigator.clipboard.writeText(text);
+      alert('Caption copied to clipboard!');
+    });
 </script>
 </body>
 </html>
